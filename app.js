@@ -10,8 +10,14 @@ app.set('view engine', 'ejs')
 app.set('views', './view-html')
 app.use(express.static('public'))
 
+
 app.get('/', c_beranda.index) 
-app.get('/login', c_auth.form_login) 
+app.get('/login', c_auth.form_login)
+app.post("/proses-login", c_auth.proses_login)
+
+app.get("/dashboard", (req, res)=>{
+    res.send("<h1>Halaman Dashboard</h1>")
+})
 
 
 app.listen(port, ()=>{
