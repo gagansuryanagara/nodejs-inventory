@@ -8,6 +8,7 @@ const session = require ("express-session")
 // import
 const c_beranda = require('./controller/c_beranda')
 const c_auth    = require('./controller/c_auth')
+const c_dashboard = require('./controller/c_dashboard')
 
 
 
@@ -44,9 +45,8 @@ app.get('/', c_beranda.index)
 app.get('/login', c_auth.form_login)
 app.post("/proses-login", c_auth.proses_login)
 
-app.get("/dashboard", c_auth.cek_login, (req, res)=>{
-    res.send("<h1>Halaman Dashboard</h1>" +JSON.stringify(req.session))
-})
+
+app.get("/dashboard", c_auth.cek_login, c_dashboard.index)
 
 
 
