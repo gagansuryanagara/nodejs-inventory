@@ -32,7 +32,7 @@ module.exports =
 
     form_login: function(req,res) {
         if (req.session.user) {
-            res.redirect("/dasboard")
+            res.redirect("/dashboard")
         } else {
                 let dataview = {
             req:req

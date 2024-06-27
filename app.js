@@ -45,7 +45,7 @@ app.get('/login', c_auth.form_login)
 app.post("/proses-login", c_auth.proses_login)
 
 app.get("/dashboard", c_auth.cek_login, (req, res)=>{
-    res.send("<h1>Halaman Dashboard</h1>")
+    res.send("<h1>Halaman Dashboard</h1>" +JSON.stringify(req.session))
 })
 
 
