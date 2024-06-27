@@ -31,10 +31,14 @@ module.exports =
 {
 
     form_login: function(req,res) {
-        let dataview = {
+        if (req.session.user) {
+            res.redirect("/dasboard")
+        } else {
+                let dataview = {
             req:req
         }
         res.render('auth/form-login',dataview)
+    }
     },
 
 
@@ -43,11 +47,13 @@ module.exports =
         let username = req.body.form_username
         let password = req.body.form_password
 
+
         let user = await cari_username(username)
         if(user){
             let passwordCocok = bcrypt.compareSync(password, user.password)
-            if (passwordCocok) {
-                res.redirect("/dashboard")
+            if (passwordCocok) { 
+                req.session.user = user
+                return res.redirect("/dashboard")
             } else {
                 res.redirect(`/login?msg=password salah`)
             }
@@ -55,6 +61,15 @@ module.exports =
             res.redirect(`/login?msg=username tidak terdaftar, silahkan hubungi administrator sistem.`)
         }
         
+    },
+
+    cek_login: function (req, res, next) {
+        if (req.session.user) {
+            next()
+        } else {
+            res.redirect(`/login?msg=sesi anda sudah habis, silahkan login ulang!!!`)
+
+        }
     },
 
 }
