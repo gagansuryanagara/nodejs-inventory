@@ -50,7 +50,8 @@ app.post("/proses-login", c_auth.proses_login)
 app.get("/dashboard", c_auth.cek_login, c_dashboard.index)
 app.get("/master-produk", c_auth.cek_login, c_master_produk.index)
 app.get("/user-management",c_auth.cek_login,c_user.index)
-
+app.get("/user/tambah",c_auth.cek_login,c_user.form_tambah)
+app.post("/user/proses-simpan",c_auth.cek_login,c_user.proses_simpan)
 
 
 app.listen(port, ()=>{
