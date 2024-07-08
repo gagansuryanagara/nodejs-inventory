@@ -22,7 +22,7 @@ module.exports =
     },
 
 
-    tambah: function (req) {
+    tambah:function (req) {
         let data ={
             username        : req.body.form_username,
             password        : bcrypt.hashSync(req.body.form_password),

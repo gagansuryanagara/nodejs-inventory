@@ -45,10 +45,18 @@ app.use(express.static('public'))
 app.get('/', c_beranda.index) 
 app.get('/login', c_auth.form_login)
 app.post("/proses-login", c_auth.proses_login)
-
+app.get('/logout', c_auth.logout)
 
 app.get("/dashboard", c_auth.cek_login, c_dashboard.index)
+
 app.get("/master-produk", c_auth.cek_login, c_master_produk.index)
+app.get("/master-produk/tambah", c_auth.cek_login, c_master_produk.form_tambah)
+app.post("/master-produk/proses-simpan",c_auth.cek_login,c_master_produk.proses_simpan)
+app.get("/master-produk/proses-hapus/:id",c_auth.cek_login,c_master_produk.proses_hapus)
+app.get("/master-produk/edit/:id", c_auth.cek_login, c_master_produk.form_edit)
+app.post("/master-produk/proses-edit/", c_auth.cek_login, c_master_produk.proses_edit)
+
+
 app.get("/user-management",c_auth.cek_login,c_user.index)
 app.get("/user/tambah",c_auth.cek_login,c_user.form_tambah)
 app.post("/user/proses-simpan",c_auth.cek_login,c_user.proses_simpan)

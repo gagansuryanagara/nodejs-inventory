@@ -1,7 +1,6 @@
 const bcrypt    = require ("bcryptjs")
-const mysql     = require('mysql2')
+const mysql     = require ('mysql2')
 const db = require("../config/database").db
-
 
 let cari_username = function (username) {
     return new Promise((resolve, reject)=>{
@@ -65,5 +64,18 @@ module.exports =
 
         }
     },
+
+    // Proses Logout
+    logout: function (req, res, next) {
+        req.session.destroy((err) => {
+            if (err) {
+              return res.status(500).send('Failed to destroy session');
+            }
+            res.redirect(`/login?msg=sesi anda sudah habis, silahkan login ulang!!!`);
+          })
+    },
+
+
+
 
 }
